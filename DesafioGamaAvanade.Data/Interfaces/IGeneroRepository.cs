@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DesafioGamaAvanade.Data.Interfaces
 {
-    public interface IArtistaService
+    public interface IGeneroRepository
     {
     }
 }
