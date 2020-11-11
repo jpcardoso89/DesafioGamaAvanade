@@ -10,5 +10,6 @@ namespace DesafioGamaAvanade.Business.Interfaces
         Task<TEntity> Save(TEntity entity);
         Task<TEntity> Delete(Guid id);
         Task<TEntity> Update(TEntity entity);
+        Task<List<TEntity>> Get();
     }
 }

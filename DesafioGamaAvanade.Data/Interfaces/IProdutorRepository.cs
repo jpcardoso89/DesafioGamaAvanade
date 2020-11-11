@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DesafioGamaAvanade.Business.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DesafioGamaAvanade.Data.Interfaces
 {
-    interface IProdutorRepository
+    public interface IProdutorRepository : IRepository<Genero>
     {
     }
 }
