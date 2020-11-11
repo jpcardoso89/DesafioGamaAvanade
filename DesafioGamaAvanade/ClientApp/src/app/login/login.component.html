@@ -1,12 +1,14 @@
 <div class="container-fluid d-flex justify-content-center align-items-center bg-dark vh-100 p-0">
   <div class="row border bg-light">
      <div class="d-flex flex-column col-12 px-5 py-5">
-       <h2 class="mb-4">Gamma Academy Challenge</h2>
-       <p>Login:</p>
-       <input class="mb-4" type="text" required [(ngModel)]="userName" />
-       <p>Senha:</p>
-       <input class="mb-4" type="password" required [(ngModel)]="password" />
-       <button type="button" class="btn btn-success col-3" (click)="submit('testeinterno')">Confirmar</button>
+       <form class="d-flex flex-column" (submit)="submit()">
+         <h2 class="mb-4">Gamma Academy Challenge</h2>
+         <p>Login:</p>
+         <input class="mb-4" type="text" required [(ngModel)]="userName" />
+         <p>Senha:</p>
+         <input class="mb-4" type="password" required [(ngModel)]="password" />
+         <button type="submit" class="btn btn-success col-3 align-self-end">Entrar</button>
+       </form>
      </div>
   </div>
 </div>

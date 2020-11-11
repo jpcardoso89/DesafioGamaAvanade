@@ -1,0 +1,42 @@
+<div class="container-fluid d-flex justify-content-center align-items-center bg-dark p-0">
+  <div class="row border bg-light mt-5">
+     <div class="d-flex flex-column col-12 px-5 pb-5 pt-3">
+       <form class="d-flex flex-column" (submit)="submit()">
+         <h1 class="mb-5">Cadastro de Ator/Atriz</h1>
+         <h3>Dados de acesso</h3>
+         <p>Email:</p>
+         <input class="mb-4" type="text" required [(ngModel)]="userName" />
+         <p>Senha:</p>
+         <input class="mb-4" type="password" required [(ngModel)]="userName" />
+         <p>Confirmar Senha:</p>
+         <input class="mb-4" type="password" required [(ngModel)]="userName" />
+         <h3>Dados Pessoais</h3>
+         <p>Nome:</p>
+         <input class="mb-4" type="text" required [(ngModel)]="userName" />
+         <p>Idade:</p>
+         <input class="mb-4" type="text" required [(ngModel)]="password" />
+         <div class="mb-4">
+           <p class="mb-0">Sexo:</p>
+           <div class="form-check">
+             <input class="form-check-input" type="radio" [(ngModel)]="sexo" name="masculino" id="masculino" value="masc">
+             <label class="form-check-label" for="masculino">
+               Masculino
+             </label>
+           </div>
+           <div class="form-check">
+             <input class="form-check-input" type="radio" [(ngModel)]="sexo" name="feminino" id="feminino" value="fem">
+             <label class="form-check-label" for="feminino">
+               Feminino
+             </label>
+           </div>
+         </div>
+         <h3>Dados Profissionais</h3>
+         <p>Preço:</p>
+         <input class="mb-4" type="text" required [(ngModel)]="password" />
+         <p>Generos:</p>
+         <input class="mb-4" type="text" required [(ngModel)]="password" />
+         <button type="submit" class="btn btn-success col-3 align-self-end">Registrar</button>
+       </form>
+     </div>
+  </div>
+</div>
