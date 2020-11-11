@@ -18,10 +18,11 @@ namespace DesafioGamaAvanade.Configuration
             services.AddScoped<IGeneroRepository, GeneroRepository>();
             services.AddScoped<IProdutorRepository, ProdutorRepository>();
 
-            //services.AddScoped<INotificador, Notificador>();
             services.AddScoped<IArtistaService, ArtistaService>();
             services.AddScoped<IGeneroService, GeneroService>();
+            services.AddScoped<IProdutorService, ProdutorService>();
 
+            //services.AddScoped<INotificador, Notificador>();
             return services;
         }
     }

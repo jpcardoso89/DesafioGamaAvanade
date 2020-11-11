@@ -1,17 +1,25 @@
-﻿using DesafioGamaAvanade.Business.Models;
+﻿using DapperExtensions;
+using DesafioGamaAvanade.Business.Models;
 using DesafioGamaAvanade.Data.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace DesafioGamaAvanade.Data.Repository
 {
     public class GeneroRepository : IGeneroRepository
     {
-        public Task<Genero> Add(Genero entity)
+        private readonly IConfiguration _configuration;
+        public async Task<Genero> Add(Genero entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection cn = new SqlConnection(_connectionString))
+            {
+                cn.Open();
+                Guid id = cn.Insert(entity);
+                cn.Close();
+                entity.Id = id;
+                return entity;
+            }
         }
 
         public Task<Genero> Delete(Genero entity)
