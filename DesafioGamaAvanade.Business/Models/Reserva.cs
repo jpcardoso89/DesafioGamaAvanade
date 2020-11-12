@@ -9,7 +9,9 @@ namespace DesafioGamaAvanade.Business.Models
         public Guid Id { get; set; }
         public Produtor Produtor { get; set; }
         public Artista Artista { get; set; }
-        public DateTime DataDaReserva { get; set; }
+        public DateTime DataInicio { get; set; }
+        public DateTime DataFim { get; set; }
+        public decimal CacheTotal { get; set; }
 
         public Reserva()
         {

@@ -1,6 +1,7 @@
 ﻿using DapperExtensions;
 using DesafioGamaAvanade.Business.Models;
 using DesafioGamaAvanade.Data.Interfaces;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
@@ -10,9 +11,13 @@ namespace DesafioGamaAvanade.Data.Repository
     public class GeneroRepository : IGeneroRepository
     {
         private readonly IConfiguration _configuration;
+        public GeneroRepository(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
         public async Task<Genero> Add(Genero entity)
         {
-            using (SqlConnection cn = new SqlConnection(_connectionString))
+            using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
                 cn.Open();
                 Guid id = cn.Insert(entity);

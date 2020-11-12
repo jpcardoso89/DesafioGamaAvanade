@@ -8,5 +8,6 @@ namespace DesafioGamaAvanade.Business.Models
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
+        public IEnumerable<Reserva> Reservas { get; set; }
     }
 }
