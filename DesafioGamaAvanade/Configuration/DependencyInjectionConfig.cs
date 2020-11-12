@@ -1,6 +1,5 @@
 ﻿using DesafioGamaAvanade.Business.Interfaces;
 using DesafioGamaAvanade.Business.Services;
-using DesafioGamaAvanade.Data.Interfaces;
 using DesafioGamaAvanade.Data.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using System;

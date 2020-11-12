@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesafioGamaAvanade.Data.Interfaces
+namespace DesafioGamaAvanade.Business.Interfaces
 {
     public interface IRepository<TEntity>
     {

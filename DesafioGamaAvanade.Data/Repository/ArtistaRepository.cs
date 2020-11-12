@@ -1,5 +1,5 @@
 ﻿using DesafioGamaAvanade.Business.Models;
-using DesafioGamaAvanade.Data.Interfaces;
+using DesafioGamaAvanade.Business.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;

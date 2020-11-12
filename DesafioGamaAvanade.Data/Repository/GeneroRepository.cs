@@ -1,6 +1,7 @@
-﻿using DapperExtensions;
+﻿using Dapper;
+using DapperExtensions;
 using DesafioGamaAvanade.Business.Models;
-using DesafioGamaAvanade.Data.Interfaces;
+using DesafioGamaAvanade.Business.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Data.SqlClient;
@@ -20,9 +21,8 @@ namespace DesafioGamaAvanade.Data.Repository
             using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
             {
                 cn.Open();
-                Guid id = cn.Insert(entity);
+                await cn.ExecuteAsync(@"INSERT INTO Genero Values(@Id, @Nome)",entity);
                 cn.Close();
-                entity.Id = id;
                 return entity;
             }
         }

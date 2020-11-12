@@ -9,6 +9,11 @@ namespace DesafioGamaAvanade.Business.Services
 {
     public class GeneroService : IGeneroService
     {
+        private readonly IGeneroRepository _generoRepository;
+        public GeneroService(IGeneroRepository generoRepository)
+        {
+            var _generoRepository = generoRepository;
+        }
         public Task<Genero> Delete(Guid id)
         {
             throw new NotImplementedException();
@@ -19,9 +24,10 @@ namespace DesafioGamaAvanade.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<Genero> Save(Genero entity)
+        public async Task<Genero> Save(Genero entity)
         {
-            throw new NotImplementedException();
+            await _generoRepository.Add(entity);
+            return entity;
         }
 
         public Task<Genero> Update(Genero entity)

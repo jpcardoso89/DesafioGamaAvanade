@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DesafioGamaAvanade.Data.Interfaces
+namespace DesafioGamaAvanade.Business.Interfaces
 {
     public interface IArtistaRepository : IRepository<Artista>
     {

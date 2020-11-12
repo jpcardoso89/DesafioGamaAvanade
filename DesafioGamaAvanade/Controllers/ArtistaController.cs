@@ -14,10 +14,10 @@ namespace DesafioGamaAvanade.Controllers
     public class ArtistaController : ControllerBase
     {
         
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<ArtistaController> _logger;
         private readonly IArtistaService _artistaService;
 
-        public ArtistaController(IArtistaService artistaService, ILogger<WeatherForecastController> logger)
+        public ArtistaController(IArtistaService artistaService, ILogger<ArtistaController> logger)
         {
             _artistaService = artistaService;
             _logger = logger;

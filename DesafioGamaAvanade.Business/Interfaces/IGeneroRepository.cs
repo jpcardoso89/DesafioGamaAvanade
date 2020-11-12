@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DesafioGamaAvanade.Data.Interfaces
+namespace DesafioGamaAvanade.Business.Interfaces
 {
-    public interface IProdutorRepository : IRepository<Genero>
+    public interface IGeneroRepository : IRepository<Genero>
     {
     }
 }
