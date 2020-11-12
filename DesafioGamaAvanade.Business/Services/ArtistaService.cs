@@ -14,9 +14,12 @@ namespace DesafioGamaAvanade.Business.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<Artista>> Get()
+        public async Task<List<Artista>> Get()
         {
-            throw new NotImplementedException();
+            var listaArtista = new List<Artista>();
+            // listaArtista = await artistaRepository.ListAll();
+            listaArtista.Add(new Artista("Reinaldo janequine", 1500));
+            return listaArtista;
         }
 
         public Task<Artista> Save(Artista entity)
