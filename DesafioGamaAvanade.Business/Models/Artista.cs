@@ -14,5 +14,12 @@ namespace DesafioGamaAvanade.Business.Models
         {
             Id = Guid.NewGuid();
         }
+
+        public Artista(string nome, decimal valorDaAtuacao)
+        {
+            Id = Guid.NewGuid();
+            Nome = nome;
+            ValorDaAtuacao = valorDaAtuacao;
+        }
     }
 }
