@@ -8,5 +8,10 @@ namespace DesafioGamaAvanade.Business.Models
     {
         public Guid Id { get; set; }
         public string Nome { get; set; }
+
+        public Genero()
+        {
+            Id = Guid.NewGuid();
+        }
     }
 }

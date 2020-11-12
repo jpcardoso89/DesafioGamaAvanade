@@ -12,7 +12,7 @@ namespace DesafioGamaAvanade.Business.Services
         private readonly IGeneroRepository _generoRepository;
         public GeneroService(IGeneroRepository generoRepository)
         {
-            var _generoRepository = generoRepository;
+            _generoRepository = generoRepository;
         }
         public Task<Genero> Delete(Guid id)
         {
