@@ -9,6 +9,8 @@ create table Artista(
 	Idade int NOT NULL
 );
 
+Alter table Artista alter column Cache decimal(38,2) not null;
+
 CREATE TABLE Genero(
 	Id uniqueidentifier Not null PRIMARY KEY,
 	Nome varchar(255) NOT NULL,

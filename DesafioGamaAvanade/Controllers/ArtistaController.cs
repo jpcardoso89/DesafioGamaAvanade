@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace DesafioGamaAvanade.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ArtistaController : ControllerBase
     {
         
@@ -29,6 +29,13 @@ namespace DesafioGamaAvanade.Controllers
             var artistas = await this._artistaService.Get().ConfigureAwait(false);
 
             return artistas;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<Artista>> Adicionar(Artista artista)
+        {
+            var artistaSalvo = await this._artistaService.Save(artista);
+            return Ok(artistaSalvo);
         }
     }
 }
