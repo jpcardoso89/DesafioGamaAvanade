@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using DesafioGamaAvanade.Business.Interfaces;
 using DesafioGamaAvanade.Business.Models;
+using Marraia.Notifications.Base;
+using Marraia.Notifications.Models;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,19 +14,19 @@ namespace DesafioGamaAvanade.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class GeneroController : ControllerBase
+    public class GeneroController : BaseController
     {
         private readonly IGeneroService _generoService;
-        public GeneroController(IGeneroService generoService)
+        public GeneroController(INotificationHandler<DomainNotification> notification, IGeneroService generoService) : base(notification)
         {
             this._generoService = generoService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Genero>> Adicionar(Genero genero)
+        public async Task<IActionResult> Adicionar(Genero genero)
         {
-            await this._generoService.Save(genero);
-            return Ok(genero);
+            var generoSalvo = await this._generoService.Save(genero);
+            return CreatedContent("", generoSalvo);
         }
 
         [HttpGet("{id}")]

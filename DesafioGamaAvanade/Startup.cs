@@ -1,4 +1,5 @@
 using DesafioGamaAvanade.Configuration;
+using Marraia.Notifications.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,7 @@ namespace DesafioGamaAvanade
                 configuration.RootPath = "ClientApp/dist";
             });
             services.ResolveDependencies();
+            services.AddSmartNotification();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 ﻿using DesafioGamaAvanade.Business.Interfaces;
 using DesafioGamaAvanade.Business.Models;
+using Marraia.Notifications.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,9 +11,12 @@ namespace DesafioGamaAvanade.Business.Services
     public class GeneroService : IGeneroService
     {
         private readonly IGeneroRepository _generoRepository;
-        public GeneroService(IGeneroRepository generoRepository)
+        private readonly ISmartNotification _notification;
+
+        public GeneroService(ISmartNotification notification,IGeneroRepository generoRepository)
         {
             _generoRepository = generoRepository;
+            _notification = notification;
         }
         public async Task<int> Delete(Guid id)
         {
@@ -31,6 +35,11 @@ namespace DesafioGamaAvanade.Business.Services
 
         public async Task<Genero> Save(Genero entity)
         {
+            if (string.IsNullOrEmpty(entity.Nome))
+            {
+                _notification.NewNotificationBadRequest("Nome do genero é obrigatório!");
+                return default;
+            }
             await _generoRepository.Add(entity);
             return entity;
         }
