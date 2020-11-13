@@ -9,17 +9,19 @@ namespace DesafioGamaAvanade.Business.Services
 {
     public class ArtistaService : IArtistaService
     {
-        public Task<Artista> Delete(Guid id)
+        public Task<int> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<List<Artista>> Get()
+        public Task<IEnumerable<Artista>> Get()
         {
-            var listaArtista = new List<Artista>();
-            // listaArtista = await artistaRepository.ListAll();
-            listaArtista.Add(new Artista("Reinaldo janequine", 1500));
-            return listaArtista;
+            throw new NotImplementedException();
+        }
+
+        public Task<Artista> GetById(Guid id)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<Artista> Save(Artista entity)

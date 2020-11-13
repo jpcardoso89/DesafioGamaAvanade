@@ -9,12 +9,17 @@ namespace DesafioGamaAvanade.Business.Services
 {
     public class ProdutorService : IProdutorService
     {
-        public Task<Produtor> Delete(Guid id)
+        public Task<int> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Produtor>> Get()
+        public Task<IEnumerable<Produtor>> Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Produtor> GetById(Guid id)
         {
             throw new NotImplementedException();
         }

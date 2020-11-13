@@ -24,7 +24,7 @@ namespace DesafioGamaAvanade.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Artista>> Get()
+        public async Task<IEnumerable<Artista>> Get()
         {
             var artistas = await this._artistaService.Get().ConfigureAwait(false);
 

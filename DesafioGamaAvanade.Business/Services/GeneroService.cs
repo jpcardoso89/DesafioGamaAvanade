@@ -14,14 +14,19 @@ namespace DesafioGamaAvanade.Business.Services
         {
             _generoRepository = generoRepository;
         }
-        public Task<Genero> Delete(Guid id)
+        public async Task<int> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return await _generoRepository.DeleteById(id);
         }
 
-        public Task<List<Genero>> Get()
+        public async Task<IEnumerable<Genero>> Get()
         {
-            throw new NotImplementedException();
+            return await _generoRepository.ListAll();
+        }
+
+        public async Task<Genero> GetById(Guid id)
+        {
+            return await _generoRepository.FindById(id) ;
         }
 
         public async Task<Genero> Save(Genero entity)
@@ -30,9 +35,9 @@ namespace DesafioGamaAvanade.Business.Services
             return entity;
         }
 
-        public Task<Genero> Update(Genero entity)
+        public async Task<Genero> Update(Genero entity)
         {
-            throw new NotImplementedException();
+            return await _generoRepository.Update(entity);
         }
     }
 }

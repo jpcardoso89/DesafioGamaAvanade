@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace DesafioGamaAvanade.Data.Repository
 {
@@ -18,38 +19,93 @@ namespace DesafioGamaAvanade.Data.Repository
         }
         public async Task<Genero> Add(Genero entity)
         {
-            using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+            try
             {
-                cn.Open();
-                await cn.ExecuteAsync(@"INSERT INTO Genero Values(@Id, @Nome)",entity);
-                cn.Close();
-                return entity;
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    await cn.ExecuteAsync(@"INSERT INTO Genero Values(@Id, @Nome)",entity);
+                    cn.Close();
+                    return entity;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
-        public Task<Genero> Delete(Genero entity)
+        
+        public async Task<int> DeleteById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var rowsAfected = await cn.ExecuteAsync(@"DELETE FROM Genero WHERE Id = @id", new { id });
+                    cn.Close();
+                    return rowsAfected;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<Genero> DeleteById(Guid id)
+        public async Task<Genero> FindById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var genero = await cn.QueryFirstOrDefaultAsync<Genero>(@"SELECT * FROM Genero WHERE Id = @id", new { id });
+                    cn.Close();
+                    return genero;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<Genero> FindById(Guid id)
+        public async Task<IEnumerable<Genero>> ListAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var generos = await cn.QueryAsync<Genero>(@"SELECT * FROM Genero");
+                    cn.Close();
+                    return generos;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Task<Genero> ListAll()
+        public async Task<Genero> Update(Genero entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Genero> Update(Genero entity)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    await cn.ExecuteAsync(@"UPDATE Genero SET Nome = @Nome WHERE Id = @Id", new { entity.Nome, entity.Id});
+                    cn.Close();
+                    return entity;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

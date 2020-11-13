@@ -25,5 +25,39 @@ namespace DesafioGamaAvanade.Controllers
             await this._generoService.Save(genero);
             return Ok(genero);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Genero>> GetGenero(Guid id)
+        {
+            var genero = await _generoService.GetById(id).ConfigureAwait(false);
+            return Ok(genero);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Genero>>> GetAll()
+        {
+            var generos = await _generoService.Get().ConfigureAwait(false);
+            return Ok(generos);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Genero>> Delete(Guid id)
+        {
+            await this._generoService.Delete(id);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Genero>> Update(Guid id, Genero genero)
+        {
+            if (id != genero.Id)
+            {
+                return BadRequest();
+            }
+            var generoAtualizado = await this._generoService.Update(genero);
+            return Ok(generoAtualizado);
+        }
+
+
     }
 }

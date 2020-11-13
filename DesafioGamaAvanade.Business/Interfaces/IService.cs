@@ -8,8 +8,9 @@ namespace DesafioGamaAvanade.Business.Interfaces
     public interface IService<TEntity>
     {
         Task<TEntity> Save(TEntity entity);
-        Task<TEntity> Delete(Guid id);
+        Task<int> Delete(Guid id);
         Task<TEntity> Update(TEntity entity);
-        Task<List<TEntity>> Get();
+        Task<IEnumerable<TEntity>> Get();
+        Task<TEntity> GetById(Guid id);
     }
 }

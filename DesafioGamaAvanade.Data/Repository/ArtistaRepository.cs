@@ -14,12 +14,7 @@ namespace DesafioGamaAvanade.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Artista> Delete(Artista entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Artista> DeleteById(Guid id)
+        public Task<int> DeleteById(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +24,7 @@ namespace DesafioGamaAvanade.Data.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Artista> ListAll()
+        public Task<IEnumerable<Artista>> ListAll()
         {
             throw new NotImplementedException();
         }
