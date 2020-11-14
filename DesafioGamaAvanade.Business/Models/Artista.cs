@@ -8,20 +8,20 @@ namespace DesafioGamaAvanade.Business.Models
 {
     public class Artista
     {
-        public Guid Id { get; set; }
+        public Guid ArtistaId { get; set; }
         public string Nome { get; set; }
         public decimal Cache { get; set; }
         public int Idade { get; set; }
-        public IEnumerable<Genero> Generos { get; set; }
+        public List<Genero> Generos { get; set; }
 
         public Artista()
         {
-            Id = Guid.NewGuid();
+            ArtistaId = Guid.NewGuid();
         }
 
         public Artista(string nome, decimal cache)
         {
-            Id = Guid.NewGuid();
+            ArtistaId = Guid.NewGuid();
             Nome = nome;
             Cache = cache;
         }

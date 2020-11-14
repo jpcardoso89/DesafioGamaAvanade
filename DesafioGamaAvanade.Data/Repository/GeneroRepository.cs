@@ -24,7 +24,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    await cn.ExecuteAsync(@"INSERT INTO Genero Values(@Id, @Nome)",entity);
+                    await cn.ExecuteAsync(@"INSERT INTO Genero Values(@GeneroId, @Nome)", entity);
                     cn.Close();
                     return entity;
                 }
@@ -43,7 +43,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    var rowsAfected = await cn.ExecuteAsync(@"DELETE FROM Genero WHERE Id = @id", new { id });
+                    var rowsAfected = await cn.ExecuteAsync(@"DELETE FROM Genero WHERE GeneroId = @id", new { id });
                     cn.Close();
                     return rowsAfected;
                 }
@@ -61,7 +61,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    var genero = await cn.QueryFirstOrDefaultAsync<Genero>(@"SELECT * FROM Genero WHERE Id = @id", new { id });
+                    var genero = await cn.QueryFirstOrDefaultAsync<Genero>(@"SELECT * FROM Genero WHERE GeneroId = @id", new { id });
                     cn.Close();
                     return genero;
                 }
@@ -97,7 +97,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    await cn.ExecuteAsync(@"UPDATE Genero SET Nome = @Nome WHERE Id = @Id", new { entity.Nome, entity.Id});
+                    await cn.ExecuteAsync(@"UPDATE Genero SET Nome = @Nome WHERE GeneroId = @Id", new { entity.Nome, entity.GeneroId });
                     cn.Close();
                     return entity;
                 }

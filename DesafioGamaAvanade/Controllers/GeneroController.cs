@@ -53,7 +53,7 @@ namespace DesafioGamaAvanade.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Genero>> Update(Guid id, Genero genero)
         {
-            if (id != genero.Id)
+            if (id != genero.GeneroId)
             {
                 return BadRequest();
             }

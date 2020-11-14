@@ -25,7 +25,7 @@ namespace DesafioGamaAvanade.Business.Services
 
         public async Task<IEnumerable<Artista>> Get()
         {
-            throw new NotImplementedException();
+            return await _artistaRepository.ListAll();
         }
 
         public async Task<Artista> GetById(Guid id)

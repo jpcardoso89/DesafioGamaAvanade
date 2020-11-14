@@ -6,13 +6,13 @@ namespace DesafioGamaAvanade.Business.Models
 {
     public class Produtor
     {
-        public Guid Id { get; set; }
+        public Guid ProdutorId { get; set; }
         public string Nome { get; set; }
         public IEnumerable<Reserva> Reservas { get; set; }
 
         public Produtor()
         {
-            Id = Guid.NewGuid();
+            ProdutorId = Guid.NewGuid();
         }
     }
 }

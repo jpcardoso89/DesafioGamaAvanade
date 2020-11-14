@@ -6,7 +6,7 @@ namespace DesafioGamaAvanade.Business.Models
 {
     public class Reserva
     {
-        public Guid Id { get; set; }
+        public Guid ReservaId { get; set; }
         public Produtor Produtor { get; set; }
         public Artista Artista { get; set; }
         public DateTime DataInicio { get; set; }
@@ -15,7 +15,7 @@ namespace DesafioGamaAvanade.Business.Models
 
         public Reserva()
         {
-            Id = Guid.NewGuid();
+            ReservaId = Guid.NewGuid();
         }
     }
 }
