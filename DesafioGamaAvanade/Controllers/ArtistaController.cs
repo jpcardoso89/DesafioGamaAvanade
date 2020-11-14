@@ -37,5 +37,30 @@ namespace DesafioGamaAvanade.Controllers
             var artistaSalvo = await this._artistaService.Save(artista);
             return Ok(artistaSalvo);
         }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Artista>> GetArtista(Guid id)
+        {
+            var artista = await this._artistaService.GetById(id).ConfigureAwait(false);
+            return Ok(artista);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Genero>> Update(Guid id, Artista artista)
+        {
+            if (id != artista.ArtistaId)
+            {
+                return BadRequest();
+            }
+            var artistaAtualizado = await this._artistaService.Update(artista);
+            return Ok(artistaAtualizado);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Artista>> Delete(Guid id)
+        {
+            await this._artistaService.Delete(id);
+            return Ok();
+        }
     }
 }
