@@ -46,7 +46,7 @@ namespace DesafioGamaAvanade.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Genero>> Update(Guid id, Artista artista)
+        public async Task<ActionResult<Artista>> Update(Guid id, Artista artista)
         {
             if (id != artista.ArtistaId)
             {
@@ -62,5 +62,9 @@ namespace DesafioGamaAvanade.Controllers
             await this._artistaService.Delete(id);
             return Ok();
         }
+
+        
+
+
     }
 }

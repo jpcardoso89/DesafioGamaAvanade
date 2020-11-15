@@ -91,6 +91,24 @@ namespace DesafioGamaAvanade.Data.Repository
             }
         }
 
+        public async Task<IEnumerable<Producao>> ListProducaoByProdutorId(Guid produtorId)
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var producao = await cn.QueryAsync<Producao>(@"SELECT * FROM Producao Where Produtor = @produtorId", new { produtorId });
+                    cn.Close();
+                    return producao;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<Producao> Update(Producao entity)
         {
             try

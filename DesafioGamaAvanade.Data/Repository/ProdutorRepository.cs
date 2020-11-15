@@ -57,12 +57,38 @@ namespace DesafioGamaAvanade.Data.Repository
 
         public async Task<Produtor> FindById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var produtor = await cn.QueryFirstOrDefaultAsync<Produtor>(@"SELECT * FROM Produtor WHERE ProdutorId = @id", new { id });
+                    cn.Close();
+                    return produtor;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<IEnumerable<Produtor>> ListAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var produtor = await cn.QueryAsync<Produtor>(@"SELECT * FROM Produtor");
+                    cn.Close();
+                    return produtor;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<Produtor> Update(Produtor entity)

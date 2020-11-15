@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DesafioGamaAvanade.Business.Interfaces
 {
-    public interface IProducaoRepository : IRepository<Producao>
+    public interface IProducaoService : IService<Producao>
     {
         Task<IEnumerable<Producao>> ListProducaoByProdutorId(Guid produtorId);
     }

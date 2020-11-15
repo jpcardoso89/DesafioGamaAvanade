@@ -1,5 +1,6 @@
 ﻿using DesafioGamaAvanade.Business.Interfaces;
 using DesafioGamaAvanade.Business.Models;
+using Marraia.Notifications.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,29 +10,39 @@ namespace DesafioGamaAvanade.Business.Services
 {
     public class ProdutorService : IProdutorService
     {
-        public Task<int> Delete(Guid id)
+        private readonly IProdutorRepository _produtorRepository;
+        private readonly ISmartNotification _notification;
+
+        public ProdutorService(ISmartNotification notification, IProdutorRepository produtorRepository)
         {
-            throw new NotImplementedException();
+            _produtorRepository = produtorRepository;
+            _notification = notification;
         }
 
-        public Task<IEnumerable<Produtor>> Get()
+        public async Task<int> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return await _produtorRepository.DeleteById(id);
         }
 
-        public Task<Produtor> GetById(Guid id)
+        public async Task<IEnumerable<Produtor>> Get()
         {
-            throw new NotImplementedException();
+            return await _produtorRepository.ListAll();
         }
 
-        public Task<Produtor> Save(Produtor entity)
+        public async Task<Produtor> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _produtorRepository.FindById(id);
         }
 
-        public Task<Produtor> Update(Produtor entity)
+        public async Task<Produtor> Save(Produtor entity)
         {
-            throw new NotImplementedException();
+            return await _produtorRepository.Add(entity);
+        }
+
+        public async Task<Produtor> Update(Produtor entity)
+        {
+
+            return await _produtorRepository.Update(entity);
         }
     }
 }
