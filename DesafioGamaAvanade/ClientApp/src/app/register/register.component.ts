@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -11,27 +12,64 @@ export class RegisterComponent {
   isExpanded = false;
   public userName: string;
   public password: string;
-  public sexo: string;
+  public confirmPassword: string;
+  public Role: string;
+  public ArtisaForm: FormGroup;
+  public Idade: Number;
+  public Sexo: string;
+  public Cache: Number;
+  public Generos: string;
+  public ProdutorForm: FormGroup;
+  public Nome: string;
   private baseUrl: string;
   private logou: boolean;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private router: Router) {
     this.baseUrl = baseUrl;
-    this.sexo = 'masc';
+    this.Sexo = 'masc';
+    this.userName = 'joabe';
+    this.password = '123456';
+    this.confirmPassword = '123456';
+    this.Role = 'ARTISTA';
+    this.Nome = 'joabe';
+    this.Idade = 25;
+    this.Cache = 500;
+
   }
 
   submit(stg) {
-    this.http.post<string>(this.baseUrl + 'login', `{username: ${this.userName}, password: ${this.password} }`).subscribe(result => {
-      this.logou = true
-      this.router.navigateByUrl('/fetch-data');
+    var requestBody = {};
+    if (this.Role === "ARTISTA") {
+      requestBody = {
+        Login: this.userName,
+        Password: this.password,
+        Role: this.Role,
+        Name: this.Nome,
+        Idade: this.Idade,
+        Cache: this.Cache,
+        Generos: "Drama"
+      }
+    } else {
+
+    }
+    this.http.post<string>(this.baseUrl + 'api/User', JSON.stringify(requestBody), { headers: { 'Content-Type': 'application/json' } }).subscribe(result => {
+      console.log(result);
     }, error => { console.error(error.status); });
   }
 
-  collapse() {
-    this.isExpanded = false;
+  ngOnInit(): void {
+    var artistaForm = new Artista();
   }
 
-  toggle() {
-    this.isExpanded = !this.isExpanded;
+  teste(value) {
+    console.log(value);
   }
+
+  //get name() { return this.heroForm.get('name'); }
+
+  //get power() { return this.heroForm.get('power'); }
+}
+
+class Artista {
+  constructor() {}
 }

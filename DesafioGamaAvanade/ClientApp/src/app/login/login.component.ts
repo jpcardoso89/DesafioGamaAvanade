@@ -19,7 +19,9 @@ export class LoginComponent {
   }
 
   submit() {
-    this.http.post<string>(this.baseUrl + 'login', `{username: ${this.userName}, password: ${this.password} }`).subscribe(result => {
+    this.http.post<string>(this.baseUrl + 'api/login',
+      { Login: this.userName, Password: this.password } )
+      .subscribe(result => {
       this.logou = true
       this.router.navigateByUrl('/fetch-data');
     }, error => { console.error(error.status); });
