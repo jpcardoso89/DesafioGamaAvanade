@@ -20,7 +20,7 @@ namespace DesafioGamaAvanade.Business.Services
         }
         public async Task<int> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return await _artistaRepository.DeleteById(id);
         }
 
         public async Task<IEnumerable<Artista>> Get()
@@ -30,7 +30,7 @@ namespace DesafioGamaAvanade.Business.Services
 
         public async Task<Artista> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _artistaRepository.FindById(id);
         }
 
         public async Task<Artista> Save(Artista entity)
@@ -40,7 +40,7 @@ namespace DesafioGamaAvanade.Business.Services
 
         public async Task<Artista> Update(Artista entity)
         {
-            throw new NotImplementedException();
+            return await _artistaRepository.Update(entity);
         }
     }
 }

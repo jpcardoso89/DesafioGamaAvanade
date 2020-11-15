@@ -48,7 +48,8 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    var rowsAfected = await cn.ExecuteAsync(@"DELETE FROM Artista WHERE Id = @id", new { id });
+                    await cn.ExecuteAsync(@"DELETE FROM ArtistaGenero WHERE ArtistaId = @id", new { id });
+                    var rowsAfected = await cn.ExecuteAsync(@"DELETE FROM Artista WHERE ArtistaId = @id", new { id });
                     cn.Close();
                     return rowsAfected;
                 }
@@ -66,15 +67,24 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    var artista = await cn.QueryFirstOrDefaultAsync<Artista>(@"SELECT * FROM Artista WHERE Id = @id", new { id });
-                    var artistasGeneros = await cn.QueryAsync<ArtistaGeneroDTO>(@"SELECT * FROM from ArtistaGenero ag 
-                                                                                  JOIN Genero g ON g.Id = ag.GeneroId WHERE ag.ArtistaId = @id", new { id });
-                    foreach (var artistaGenero in artistasGeneros)
+                    var artista = await cn.QueryAsync<Artista, Genero, Artista>(@"select a.ArtistaId, a.Nome, a.Idade, 
+                                                                                    a.Cache, g.GeneroId, g.Nome 
+                                                                                    from Artista a 
+                                                                                    JOIN ArtistaGenero ag on ag.ArtistaId = a.ArtistaId 
+                                                                                    JOIN Genero g on g.GeneroId = ag.GeneroId
+                                                                                    WHERE a.ArtistaId = @id",(artista, genero) => {
+                        artista.Generos = artista.Generos ?? new List<Genero>();
+                        artista.Generos.Add(genero);
+                        return artista;
+                    }, splitOn: "GeneroId", param: new { id});
+                    var result = artista.GroupBy(a => a.ArtistaId).Select(g =>
                     {
-                        artista.Generos.Add(artistaGenero.Genero);
-                    }
+                        var groupedArtista = g.First();
+                        groupedArtista.Generos = g.Select(p => p.Generos.Single()).ToList();
+                        return groupedArtista;
+                    });
                     cn.Close();
-                    return artista;
+                    return result.Single();
                 }
             }
             catch (Exception ex)
@@ -122,7 +132,12 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    await cn.ExecuteAsync(@"UPDATE Artista SET Nome = @Nome, Cache= @Cache, Idade = @Idade WHERE Id = @Id", new { entity.Nome, entity.Cache, entity.Idade, entity.ArtistaId });
+                    await cn.ExecuteAsync(@"UPDATE Artista SET Nome = @Nome, Cache= @Cache, Idade = @Idade WHERE ArtistaId = @Id", new { entity.Nome, entity.Cache, entity.Idade, Id = entity.ArtistaId });
+                    await cn.ExecuteAsync(@"DELETE FROM ArtistaGenero WHERE ArtistaId = @id", new { id = entity.ArtistaId });
+                    foreach (var item in entity.Generos)
+                    {
+                        await cn.ExecuteAsync(@"INSERT INTO ArtistaGenero Values(@ArtistaId,@GeneroId)", new { entity.ArtistaId, item.GeneroId });
+                    }
                     cn.Close();
                     return entity;
                 }
