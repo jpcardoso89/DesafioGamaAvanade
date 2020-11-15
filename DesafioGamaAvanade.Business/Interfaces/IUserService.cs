@@ -10,6 +10,6 @@ namespace DesafioGamaAvanade.Business.Interfaces
 {
     public interface IUserService : IService<User>
     {
-        Task<UserViewModel> InsertAsync(UserInput input);
+        Task<object> InsertAsync(UserSaveInput input);
     }
 }

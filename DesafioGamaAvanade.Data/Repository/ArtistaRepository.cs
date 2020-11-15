@@ -26,7 +26,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    await cn.ExecuteAsync(@"INSERT INTO Artista Values(@ArtistaId, @Nome, @Cache, @Idade)", entity);
+                    await cn.ExecuteAsync(@"INSERT INTO Artista Values(NewID(), @Nome, @Cache, @Idade, @UserLogin)", new { Nome = entity.Nome, Cache = entity.Cache, Idade = entity.Idade, UserLogin = entity.User.Login });
                     foreach (var genero in entity.Generos)
                     {
                         await cn.ExecuteAsync(@"INSERT INTO ArtistaGenero Values(@ArtistaId, @GeneroId)", new { ArtistaId = entity.ArtistaId, GeneroId = genero.GeneroId });

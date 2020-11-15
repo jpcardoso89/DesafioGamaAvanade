@@ -12,11 +12,18 @@ namespace DesafioGamaAvanade.Business.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IArtistaRepository _artistaRepository;
+        private readonly IProdutorRepository _produtorRepository;
         private readonly IProfileRepository _profileRepository;
 
-        public UserService(IUserRepository userRepository, IProfileRepository profileRepository)
+        public UserService(IUserRepository userRepository,
+            IArtistaRepository artistaRepository,
+            IProdutorRepository produtorRepository,
+            IProfileRepository profileRepository)
         {
             _userRepository = userRepository;
+            _artistaRepository = artistaRepository;
+            _produtorRepository = produtorRepository;
             _profileRepository = profileRepository;
         }
         public Task<int> Delete(Guid id)
@@ -34,7 +41,7 @@ namespace DesafioGamaAvanade.Business.Services
             throw new NotImplementedException();
         }
 
-        public async Task<UserViewModel> InsertAsync(UserInput input)
+        public async Task<object> InsertAsync(UserSaveInput input)
         {
             var profile = await _profileRepository
                                     .GetByRole(input.Role)
@@ -54,11 +61,45 @@ namespace DesafioGamaAvanade.Business.Services
                 return default;
             }
 
+            // Insere o usuário de autenticação
             var id = await _userRepository
                             .InsertAsync(user)
                             .ConfigureAwait(false);
 
-            return new UserViewModel ( new Guid(id), user.Login, user.Profile, user.Created );
+            if (profile.Description == "ARTISTA")
+            {
+                var generos = new List<Genero>();
+                var artista = new Artista(input.Name, input.Idade,
+                                            input.Cache, new User(input.Login, input.Password, profile),
+                                            generos);
+                
+                if (!artista.IsValid())
+                {
+                    // _notification.NewNotificationBadRequest("Dados do usuário são obrigatórios");
+                }
+
+                var artistaId = await _artistaRepository
+                                        .Add(artista)
+                                        .ConfigureAwait(false);
+
+                return new { id, user.Login, Profile = user.Profile.Description, user.Created, artista.Nome, artista.Cache, artista.Idade, artista.Generos };
+
+            } else if (profile.Description == "PRODUTOR")
+            {
+                var produtor = new Produtor(input.Name, new User(input.Login, input.Password, profile));
+
+                if (!produtor.IsValid())
+                {
+                    // _notification.NewNotificationBadRequest("Dados do usuário são obrigatórios");
+                }
+
+                var artistaId = await _produtorRepository
+                                        .Add(produtor)
+                                        .ConfigureAwait(false);
+                return new { id, user.Login, Profile = user.Profile.Description, user.Created, produtor.Nome, produtor.Reservas };
+            }
+
+            return new { erro = "Bad Request" };
         }
 
         public Task<User> Save(User entity)

@@ -25,7 +25,7 @@ namespace DesafioGamaAvanade.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] UserInput UserInput)
+        public async Task<ActionResult> Post([FromBody] UserSaveInput UserInput)
         {
             var user = await this._userService.InsertAsync(UserInput).ConfigureAwait(false);
             return Ok(user);
