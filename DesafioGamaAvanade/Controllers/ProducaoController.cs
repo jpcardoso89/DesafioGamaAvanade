@@ -27,7 +27,7 @@ namespace DesafioGamaAvanade.Controllers
         public async Task<IEnumerable<Producao>> Get()
         {
             var producao = await this._producaoService.Get().ConfigureAwait(false);
-
+            _logger.LogInformation("Poduções listadas");
             return producao;
         }
 
@@ -35,11 +35,12 @@ namespace DesafioGamaAvanade.Controllers
         public async Task<ActionResult<Producao>> Adicionar(Producao producao)
         {
             var producaoSalva = await this._producaoService.Save(producao);
+            _logger.LogInformation("Producao salva");
             return Ok(producaoSalva);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Producao>> GetArtista(Guid id)
+        public async Task<ActionResult<Producao>> GetProducao(Guid id)
         {
             var producao = await this._producaoService.GetById(id).ConfigureAwait(false);
             return Ok(producao);
@@ -50,6 +51,7 @@ namespace DesafioGamaAvanade.Controllers
         {
             if (id != producao.ProducaoId)
             {
+                _logger.LogError("ProducaoId da url diferente do ProducaoId passado no body");
                 return BadRequest();
             }
             var producaoAtualizado = await this._producaoService.Update(producao);
@@ -60,6 +62,7 @@ namespace DesafioGamaAvanade.Controllers
         public async Task<ActionResult<Producao>> Delete(Guid id)
         {
             await this._producaoService.Delete(id);
+            _logger.LogInformation("Producao deletada");
             return Ok();
         }
         [HttpGet]
