@@ -35,24 +35,52 @@ namespace DesafioGamaAvanade.Data.Repository
             }
         }
 
-        public Task<int> DeleteById(Guid id)
+        public async Task<int> DeleteById(Guid id)
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    await cn.ExecuteAsync(@"DELETE FROM Reserva WHERE ProdutorId = @id", new { id });
+                    await cn.ExecuteAsync(@"DELETE FROM Producao WHERE ProducaoId = @id", new { id });
+                    var rowsAfected = await cn.ExecuteAsync(@"DELETE FROM Produtor WHERE ProdutorId = @id", new { id });
+                    cn.Close();
+                    return rowsAfected;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public async Task<Produtor> FindById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<Produtor> FindById(Guid id)
+        public async Task<IEnumerable<Produtor>> ListAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Produtor>> ListAll()
+        public async Task<Produtor> Update(Produtor entity)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Produtor> Update(Produtor entity)
-        {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    await cn.ExecuteAsync(@"UPDATE Produtor SET Nome = @Nome WHERE ProdutorId = @ProdutorId", new { entity.Nome, entity.ProdutorId });
+                    cn.Close();
+                    return entity;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

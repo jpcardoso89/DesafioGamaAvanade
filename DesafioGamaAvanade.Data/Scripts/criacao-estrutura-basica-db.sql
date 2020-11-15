@@ -63,7 +63,16 @@ create table Reserva(
 	ArtistaId uniqueidentifier Not null,
 	DataInicio datetime	Not null,
 	DataFim datetime	Not null,
-	CacheTotal decimal(5,2) NOT NULL,
+	CacheTotal decimal(38,2) NOT NULL,
 	constraint FK_Produtor FOREIGN KEY (ProdutorId) references Produtor(ProdutorId),
 	constraint FK_Artista FOREIGN KEY (ArtistaId) references Artista(ArtistaId),
+);
+
+create table Producao(
+	ProducaoId uniqueidentifier Not null PRIMARY KEY,
+	ProdutorId uniqueidentifier Not null,
+	Titulo varchar(255) NOT NULL,
+	DataInicialDasGravacoes datetime Not null,
+	Orcamento decimal(38,2) NOT NULL,
+	constraint FK_Producao_Produtor FOREIGN KEY (ProdutorId) references Produtor(ProdutorId)
 );

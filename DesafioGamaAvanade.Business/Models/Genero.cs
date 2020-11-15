@@ -16,6 +16,7 @@ namespace DesafioGamaAvanade.Business.Models
 
         public Genero (string nome)
         {
+            GeneroId = Guid.NewGuid();
             Nome = nome;
         }
     }
