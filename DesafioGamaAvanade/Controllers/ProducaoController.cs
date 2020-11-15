@@ -65,6 +65,7 @@ namespace DesafioGamaAvanade.Controllers
             _logger.LogInformation("Producao deletada");
             return Ok();
         }
+
         [HttpGet]
         [Route("producoes/{produtorId}")]
         public async Task<ActionResult<Producao>> ListarProducoes(Guid produtorId)
