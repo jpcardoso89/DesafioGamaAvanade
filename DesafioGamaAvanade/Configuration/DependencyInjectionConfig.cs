@@ -13,13 +13,18 @@ namespace DesafioGamaAvanade.Configuration
     {
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IArtistaRepository, ArtistaRepository>();
             services.AddScoped<IGeneroRepository, GeneroRepository>();
             services.AddScoped<IProdutorRepository, ProdutorRepository>();
+            services.AddScoped<IProfileRepository, ProfileRepository>();
 
             services.AddScoped<IArtistaService, ArtistaService>();
             services.AddScoped<IGeneroService, GeneroService>();
             services.AddScoped<IProdutorService, ProdutorService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILoginService, LoginService>();
+
 
             //services.AddScoped<INotificador, Notificador>();
             return services;

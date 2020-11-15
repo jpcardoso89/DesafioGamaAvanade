@@ -1,3 +1,5 @@
+DROP database [DesafioAvanadeGama];
+
 create database DesafioAvanadeGama;
 
 use DesafioAvanadeGama;
@@ -38,4 +40,26 @@ create table Reserva(
 	CacheTotal decimal(5,2) NOT NULL,
 	constraint FK_Produtor FOREIGN KEY (ProdutorId) references Produtor(ProdutorId),
 	constraint FK_Artista FOREIGN KEY (ArtistaId) references Artista(ArtistaId),
+);
+
+CREATE TABLE Profile (
+    Id uniqueidentifier  Not null PRIMARY KEY,
+    Description varchar(255) Not null
+);
+
+INSERT INTO profile (Id, Description)
+VALUES (NewID(), 'ARTISTA');
+
+INSERT INTO profile (Id, Description)
+VALUES (NewID(), 'PRODUTOR');
+
+SELECT * FROM PROFILE;
+
+CREATE TABLE Users (
+    Id uniqueidentifier  Not null,
+    Login varchar(255) Not null PRIMARY KEY,
+    Password varchar(255) Not null,
+    ProfileId uniqueidentifier Not null,
+    Created date,
+	constraint FK_Profile FOREIGN KEY (ProfileId) references Profile(id)
 );

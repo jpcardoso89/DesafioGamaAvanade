@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Marraia.Notifications" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.9" />
   </ItemGroup>
 
