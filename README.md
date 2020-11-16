@@ -24,3 +24,10 @@ Projeto desenvolvido para conclusão do curso na Gama Academy - Dupla: João Pau
   Reunião de alinhamento diario para acompanhamento das atividades
 
 - __Review e Retrospectiva__: Dia 16/11/2020 as 9h00
+
+# Dificuldades, Aprendizados e Desenvolvimentos
+
+O trabalho em equipe não foi problema, a gente conseguiu se comunicar muito bem e trocar muito conhecimento que ja tinhamos na bagagem.
+Conseguimos dividir bem as tarefas e conseguimos trabalhar, infelizmente não conseguimos entregar o projeto completo, estavamos aprendendo ainda com as aulas e tentando aplicar o que aprendiamos no projeto até se adaptar com a complexidade das tecnologias na pratica para quem acabou de aprender exige mais tempo.
+Porem aprendemos bastante, as aulas foram fantasticas e botar na pratica o desenvolvimento com toda a Stack do C#.NET com Angular foi muito bom para absorver o conhecimento que foi passado, agora nos sentimos bastante confiante para seguir nessa carreira utilizando essas tecnologias ou qualquer outra que for necessária.
+Talvez com mais tempo disponivel conseguiriamos terminar o projeto sem grandes problemas, com o prazo curto pra aprender e botar em pratica dificultou a entrega e tivemos que otimizar o tempo para entregarmos funcionalidades de valor.
