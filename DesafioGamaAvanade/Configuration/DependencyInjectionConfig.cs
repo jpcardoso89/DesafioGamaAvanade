@@ -19,6 +19,7 @@ namespace DesafioGamaAvanade.Configuration
             services.AddScoped<IProdutorRepository, ProdutorRepository>();
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<IProducaoRepository, ProducaoRepository>();
+            services.AddScoped<IReservaRepository, ReservaRepository>();
 
             services.AddScoped<IArtistaService, ArtistaService>();
             services.AddScoped<IGeneroService, GeneroService>();
@@ -26,6 +27,7 @@ namespace DesafioGamaAvanade.Configuration
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IProducaoService, ProducaoService>();
+            services.AddScoped<IReservaService, ReservaService>();
 
 
             //services.AddScoped<INotificador, Notificador>();
