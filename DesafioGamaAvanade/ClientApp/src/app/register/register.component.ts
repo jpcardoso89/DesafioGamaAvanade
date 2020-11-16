@@ -27,16 +27,6 @@ export class RegisterComponent {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private router: Router) {
     this.baseUrl = baseUrl;
-    this.Sexo = 'masc';
-    this.userName = 'joabe';
-    this.password = '123456';
-    this.confirmPassword = '123456';
-    this.Role = 'ARTISTA';
-    this.Nome = 'joabe';
-    this.Idade = 25;
-    this.Cache = 500;
-    this.Generos = [];
-
   }
 
   submit(stg) {
@@ -52,10 +42,15 @@ export class RegisterComponent {
         Generos: this.Generos
       }
     } else {
-
+      requestBody = {
+        Login: this.userName,
+        Password: this.password,
+        Role: this.Role,
+        Name: this.Nome
+      }
     }
     this.http.post<string>(this.baseUrl + 'api/User', JSON.stringify(requestBody), { headers: { 'Content-Type': 'application/json' } }).subscribe(result => {
-      console.log(result);
+      this.router.navigateByUrl('/');
     }, error => { console.error(error.status); });
   }
 
