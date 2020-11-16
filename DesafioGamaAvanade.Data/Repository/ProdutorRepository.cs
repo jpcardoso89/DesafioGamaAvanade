@@ -24,7 +24,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    await cn.ExecuteAsync(@"INSERT INTO Produtor Values(NewID(), @Nome, @UserLogin)", new { Nome = entity.Nome, UserLogin = entity.User.Login });
+                    await cn.ExecuteAsync(@"INSERT INTO Produtor Values(@ProdutorId, @Nome, @UserLogin)", new { ProdutorId = entity.ProdutorId, Nome = entity.Nome, UserLogin = entity.User.Login });
                     cn.Close();
                     return entity;
                 }
