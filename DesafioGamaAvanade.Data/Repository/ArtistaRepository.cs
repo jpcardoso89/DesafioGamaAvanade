@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using Dapper;
 using DesafioGamaAvanade.Business.DTO;
 using System.Linq;
+using DesafioGamaAvanade.Business.Models.Inputs;
 
 namespace DesafioGamaAvanade.Data.Repository
 {
@@ -26,7 +27,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
                 {
                     cn.Open();
-                    await cn.ExecuteAsync(@"INSERT INTO Artista Values(NewID(), @Nome, @Cache, @Idade, @UserLogin)", new { Nome = entity.Nome, Cache = entity.Cache, Idade = entity.Idade, UserLogin = entity.User.Login });
+                    await cn.ExecuteAsync(@"INSERT INTO Artista Values(@ArtistaId, @Nome, @Cache, @Idade, @UserLogin)", new { ArtistaId = entity.ArtistaId, Nome = entity.Nome, Cache = entity.Cache, Idade = entity.Idade, UserLogin = entity.User.Login });
                     foreach (var genero in entity.Generos)
                     {
                         await cn.ExecuteAsync(@"INSERT INTO ArtistaGenero Values(@ArtistaId, @GeneroId)", new { ArtistaId = entity.ArtistaId, GeneroId = genero.GeneroId });
