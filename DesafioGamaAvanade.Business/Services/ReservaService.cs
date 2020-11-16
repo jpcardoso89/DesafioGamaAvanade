@@ -25,7 +25,7 @@ namespace DesafioGamaAvanade.Business.Services
 
         public async Task<IEnumerable<Reserva>> Get()
         {
-            throw new NotImplementedException();
+            return await _reservaRepository.ListAll();
         }
 
         public async Task<Reserva> GetById(Guid id)

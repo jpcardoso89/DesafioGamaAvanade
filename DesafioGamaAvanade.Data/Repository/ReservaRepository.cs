@@ -62,7 +62,28 @@ namespace DesafioGamaAvanade.Data.Repository
 
         public async Task<IEnumerable<Reserva>> ListAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var reserva = await cn.QueryAsync<Reserva, Artista, Producao, Reserva>(@"select r.ReservaId, r.DataInicio, r.DataFim, r.CacheTotal, p.ProdutorId, 
+                                                                                             p.Titulo, a.ArtistaId, a.Nome 
+                                                                                             FROM Reserva r
+                                                                                             JOIN Produtoro p on p.ProdutorId = r.ProdutorId
+                                                                                             JOIN Artista a on a.ArtistaId = r.ArtistaId", (reserva, artista, producao) => {
+                        reserva.Producao = producao;
+                        reserva.Artista = artista;
+                        return reserva;
+                    }, splitOn: "GeneroId,ArtistaId");
+                    
+                    return reserva;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<Reserva> Update(Reserva entity)
