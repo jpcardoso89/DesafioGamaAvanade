@@ -39,7 +39,20 @@ namespace DesafioGamaAvanade.Data.Repository
 
         public async Task<int> DeleteById(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    cn.Open();
+                    var rowsAfected = await cn.ExecuteAsync(@"DELETE FROM Reserva WHERE ReservaId = @id", new { id });
+                    cn.Close();
+                    return rowsAfected;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<Reserva> FindById(Guid id)
