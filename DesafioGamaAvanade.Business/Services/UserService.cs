@@ -88,7 +88,7 @@ namespace DesafioGamaAvanade.Business.Services
                     // _notification.NewNotificationBadRequest("Dados do usuário são obrigatórios");
                 }
 
-                var artistaId = await _artistaRepository
+                var artistaBanco = await _artistaRepository
                                         .Add(artista)
                                         .ConfigureAwait(false);
 
