@@ -7,6 +7,10 @@ namespace DesafioGamaAvanade.Business.Models
 {
     public class User
     {
+        public User()
+        {
+
+        }
         public User(string login,
                     string password,
                     Profile profile)
