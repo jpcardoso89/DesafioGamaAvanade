@@ -40,6 +40,27 @@ CREATE TABLE Genero(
 	Nome varchar(255) NOT NULL,
 );
 
+INSERT INTO Genero (GeneroId, Nome)
+VALUES (NewID(), 'Terror');
+
+INSERT INTO Genero (GeneroId, Nome)
+VALUES (NewID(), 'Drama');
+
+INSERT INTO Genero (GeneroId, Nome)
+VALUES (NewID(), 'Comédia');
+
+INSERT INTO Genero (GeneroId, Nome)
+VALUES (NewID(), 'Aventura');
+
+INSERT INTO Genero (GeneroId, Nome)
+VALUES (NewID(), 'Cult');
+
+INSERT INTO Genero (GeneroId, Nome)
+VALUES (NewID(), 'Espionagem');
+
+INSERT INTO Genero (GeneroId, Nome)
+VALUES (NewID(), 'Ficção científica');
+
 CREATE TABLE Produtor(
 	ProdutorId uniqueidentifier Not null PRIMARY KEY,
 	Nome varchar(255) NOT NULL,

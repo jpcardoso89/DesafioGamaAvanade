@@ -18,9 +18,10 @@ export class RegisterComponent {
   public Idade: Number;
   public Sexo: string;
   public Cache: Number;
-  public Generos: string;
+  public Generos: string[];
   public ProdutorForm: FormGroup;
   public Nome: string;
+  public generosOptions;
   private baseUrl: string;
   private logou: boolean;
 
@@ -34,6 +35,7 @@ export class RegisterComponent {
     this.Nome = 'joabe';
     this.Idade = 25;
     this.Cache = 500;
+    this.Generos = [];
 
   }
 
@@ -47,7 +49,7 @@ export class RegisterComponent {
         Name: this.Nome,
         Idade: this.Idade,
         Cache: this.Cache,
-        Generos: "Drama"
+        Generos: this.Generos
       }
     } else {
 
@@ -58,18 +60,22 @@ export class RegisterComponent {
   }
 
   ngOnInit(): void {
-    var artistaForm = new Artista();
+    this.http.get<string>(this.baseUrl + 'api/Genero').subscribe(result => {
+      this.generosOptions = result;
+    }, error => { console.error(error.status); });
+  }
+
+  onGeneroChange(generoId: string, isChecked: boolean) {
+    if (isChecked) {
+      this.Generos.push(generoId);
+    } else {
+      const index = this.Generos.findIndex(nome => nome === generoId);
+      this.Generos.splice(index, 1);
+    }
   }
 
   teste(value) {
     console.log(value);
   }
 
-  //get name() { return this.heroForm.get('name'); }
-
-  //get power() { return this.heroForm.get('power'); }
-}
-
-class Artista {
-  constructor() {}
 }
