@@ -15,16 +15,19 @@ namespace DesafioGamaAvanade.Business.Services
         private readonly IArtistaRepository _artistaRepository;
         private readonly IProdutorRepository _produtorRepository;
         private readonly IProfileRepository _profileRepository;
+        private readonly IGeneroRepository _generoRepository;
 
         public UserService(IUserRepository userRepository,
             IArtistaRepository artistaRepository,
             IProdutorRepository produtorRepository,
-            IProfileRepository profileRepository)
+            IProfileRepository profileRepository,
+            IGeneroRepository generoRepository)
         {
             _userRepository = userRepository;
             _artistaRepository = artistaRepository;
             _produtorRepository = produtorRepository;
             _profileRepository = profileRepository;
+            _generoRepository = generoRepository;
         }
         public Task<int> Delete(Guid id)
         {
@@ -69,6 +72,13 @@ namespace DesafioGamaAvanade.Business.Services
             if (profile.Description == "ARTISTA")
             {
                 var generos = new List<Genero>();
+                foreach (var generoId in input.Generos)
+                {
+                    var genero = await _generoRepository
+                                        .FindById(new Guid(generoId))
+                                        .ConfigureAwait(false);
+                    generos.Add(genero);
+                }
                 var artista = new Artista(input.Name, input.Idade,
                                             input.Cache, new User(input.Login, input.Password, profile),
                                             generos);

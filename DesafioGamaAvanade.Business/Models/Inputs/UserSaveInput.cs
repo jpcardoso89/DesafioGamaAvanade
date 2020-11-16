@@ -12,7 +12,6 @@ namespace DesafioGamaAvanade.Business.Models.Inputs
         public string Name { get; set; }
         public int Idade { get; set; }
         public decimal Cache { get; set; }
-        
-        // public  Generos { get; set; }
+        public List<string> Generos { get; set; }
     }
 }
