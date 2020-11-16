@@ -126,6 +126,46 @@ namespace DesafioGamaAvanade.Data.Repository
             }
         }
 
+        public async Task<IEnumerable<Artista>> ListAllByFilter(PesquisaArtistaInput filter)
+        {
+            try
+            {
+                using (SqlConnection cn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection")))
+                {
+                    var builder = new SqlBuilder();
+                    var selector = builder.AddTemplate(@"select a.ArtistaId, a.Nome, a.Idade, a.Cache, g.GeneroId, g.Nome from Artista a JOIN ArtistaGenero ag on ag.ArtistaId = a.ArtistaId JOIN Genero g on g.GeneroId = ag.GeneroId LEFT JOIN Reserva r on r.ArtistaId = a.ArtistaId /**where**/");
+                    if (filter.DataInicio.HasValue)
+                    {
+                        builder.Where("r.DataFim < @DataInicio", new { DataInicio = filter.DataInicio.Value });
+                    }
+
+                    if (filter.OrcamentoMaximo.HasValue)
+                    {
+                        builder.Where("a.Cache <= @OrcamentoMaximo", new { OrcamentoMaximo = filter.OrcamentoMaximo.Value });
+                    }
+
+                    cn.Open();
+                    var artista = await cn.QueryAsync<Artista, Genero, Artista>(selector.RawSql, (artista, genero) => {
+                        artista.Generos = artista.Generos ?? new List<Genero>();
+                        artista.Generos.Add(genero);
+                        return artista;
+                    }, splitOn: "GeneroId", param: selector.Parameters);
+                    var result = artista.GroupBy(a => a.ArtistaId).Select(g =>
+                    {
+                        var groupedArtista = g.First();
+                        groupedArtista.Generos = g.Select(p => p.Generos.Single()).ToList();
+                        return groupedArtista;
+                    });
+                    cn.Close();
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public async Task<Artista> Update(Artista entity)
         {
             try

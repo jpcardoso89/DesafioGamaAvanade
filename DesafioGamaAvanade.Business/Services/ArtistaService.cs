@@ -1,5 +1,6 @@
 ﻿using DesafioGamaAvanade.Business.Interfaces;
 using DesafioGamaAvanade.Business.Models;
+using DesafioGamaAvanade.Business.Models.Inputs;
 using Marraia.Notifications.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,11 @@ namespace DesafioGamaAvanade.Business.Services
         public async Task<Artista> GetById(Guid id)
         {
             return await _artistaRepository.FindById(id);
+        }
+
+        public async Task<IEnumerable<Artista>> ListAllByFilter(PesquisaArtistaInput filter)
+        {
+            return await _artistaRepository.ListAllByFilter(filter);
         }
 
         public async Task<Artista> Save(Artista entity)

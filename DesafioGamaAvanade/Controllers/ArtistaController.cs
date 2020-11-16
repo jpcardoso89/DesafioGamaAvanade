@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DesafioGamaAvanade.Business.Interfaces;
 using DesafioGamaAvanade.Business.Models;
+using DesafioGamaAvanade.Business.Models.Inputs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -63,7 +64,13 @@ namespace DesafioGamaAvanade.Controllers
             return Ok();
         }
 
-        
+        [HttpPost]
+        [Route("filter")]
+        public async Task<ActionResult<Artista>> Filter(PesquisaArtistaInput pesquisaArtistaInput)
+        {
+            var artistaSalvo = await this._artistaService.ListAllByFilter(pesquisaArtistaInput);
+            return Ok(artistaSalvo);
+        }
 
 
     }
