@@ -26,7 +26,7 @@ namespace DesafioGamaAvanade.Data.Repository
                 {
                     cn.Open();
                     await cn.ExecuteAsync(@"INSERT INTO Reserva Values(@ProducaoId, @ArtistaId, @DataInicio, @DataFim, @CacheTotal)"
-                                        , new { entity.Producao.ProducaoId, entity.Artista.ArtistaId, entity.DataInicio, entity.DataFim });
+                                        , new { entity.ProducaoId, entity.ArtistaId, entity.DataInicio, entity.DataFim, entity.CacheTotal });
                     cn.Close();
                     return entity;
                 }
