@@ -69,17 +69,17 @@
     <div *ngIf="Role === 'PRODUTOR'" class="d-flex flex-column col-12 px-5 pb-5 pt-3">
       <form class="d-flex flex-column" #prodForm="ngForm" (submit)="submit()">
         <h1 class="mb-5">Cadastro do Produtor</h1>
-        <p>Login*:</p>
+        <p class="mt-4">Login*:</p>
         <input type="text" id="userName" ngModel name="userName" minlength="4" #userProd="ngModel" required [(ngModel)]="userName" />
         <small *ngIf="!userProd.valid && prodForm.submitted" class="text-danger">Email é obrigatório!</small>
-        <p>Senha*:</p>
+        <p class="mt-4">Senha*:</p>
         <input type="password" id="password" ngModel name="password" minlength="4" #passProd="ngModel" required [(ngModel)]="password" />
         <small *ngIf="!passProd.valid && prodForm.submitted" class="text-danger">Senha é obrigatória!</small>
-        <p>Confirmar Senha*:</p>
+        <p class="mt-4">Confirmar Senha*:</p>
         <input type="password" id="confirmPassword" ngModel name="confirmPassword" minlength="4" #confirmProd="ngModel" required [(ngModel)]="confirmPassword" />
         <small *ngIf="!confirmProd.valid && prodForm.submitted" class="text-danger">Confirmar a senha é obrigatório!</small>
         <small *ngIf="confirmPassword !== password && prodForm.submitted" class="text-danger">Senhas não são iguais!</small>
-        <p>Nome:</p>
+        <p class="mt-4">Nome:</p>
         <input type="text" id="Nome" ngModel name="Nome" minlength="4" #nomeProd="ngModel" required [(ngModel)]="Nome" />
         <small *ngIf="!nomeProd.valid && prodForm.submitted" class="text-danger">Nome é obrigatório!</small>
         <button type="submit" class="btn btn-success col-3 align-self-end">Registrar</button>
