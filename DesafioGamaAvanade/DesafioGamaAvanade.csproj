@@ -26,6 +26,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\services\hero\hero.service.spec.ts" />
+    <None Remove="ClientApp\src\app\services\providers\provider.service.spec.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\DesafioGamaAvanade.Data\DesafioGamaAvanade.Data.csproj" />
   </ItemGroup>
 

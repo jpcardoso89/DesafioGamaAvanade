@@ -56,7 +56,7 @@ namespace SuperHero.Api.Controllers
                         new[] {
                         new Claim(JwtRegisteredClaimNames.Jti, logged.Id.ToString()),
                         new Claim(ClaimTypes.Role, logged.Profile.Description),
-                        new Claim("IdProfile", logged.Profile.Id.ToString())
+                        new Claim("ProfileId", logged.Profile.Id.ToString())
                         }
                     );
 

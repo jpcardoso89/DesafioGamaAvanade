@@ -1,6 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { Router } from "@angular/router";
 import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from '../services/providers/authentication/authentication.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,22 +10,28 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  @ViewChild('loginForm', { static: false }) loginForm: NgForm;
   isExpanded = false;
   public userName: string;
   public password: string;
-  private baseUrl: string;
-  private logou: boolean;
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string, private router: Router) {
-    this.baseUrl = baseUrl;
+  constructor(private http: HttpClient,
+              @Inject('BASE_URL') baseUrl: string,
+              private router: Router,
+              private authService: AuthenticationService ) {
   }
 
   submit() {
-    this.http.post<string>(this.baseUrl + 'api/login',
-      { Login: this.userName, Password: this.password } )
-      .subscribe(result => {
-      this.logou = true
-      this.router.navigateByUrl('/fetch-data');
-    }, error => { console.error(error.status); });
+    if (!this.loginForm.valid) {
+      return;
+    }
+
+    this.authService
+      .login(this.userName, this.password)
+      .subscribe((user) => {
+        this.router.navigateByUrl('/fetch-data');
+      }, (error) => {
+        alert("Não foi possivel fazer o login, tente novamente!")
+      });
   }
 }

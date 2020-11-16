@@ -5,13 +5,14 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './helpers/auth.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' },
   { path: 'counter', component: CounterComponent },
-  { path: 'fetch-data', component: FetchDataComponent },
+  { path: 'fetch-data', canActivate: [AuthGuard], data: { expectedRole: 'ARTISTA' }, component: FetchDataComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
 ];
 
-export const appRoutingModule = RouterModule.forRoot(routes);
+export const AppRoutingModule = RouterModule.forRoot(routes);
