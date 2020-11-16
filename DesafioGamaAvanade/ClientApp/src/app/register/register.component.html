@@ -82,7 +82,10 @@
         <p class="mt-4">Nome:</p>
         <input type="text" id="Nome" ngModel name="Nome" minlength="4" #nomeProd="ngModel" required [(ngModel)]="Nome" />
         <small *ngIf="!nomeProd.valid && prodForm.submitted" class="text-danger">Nome é obrigatório!</small>
-        <button type="submit" class="btn btn-success col-3 align-self-end">Registrar</button>
+        <div class="d-flex justify-content-between mt-3">
+          <button type="button" (click)="Role = ''" class="mt-4 btn btn-secondary col-3 align-self-end">Voltar</button>
+          <button type="submit" class="mt-4 btn btn-success col-3 align-self-end">Registrar</button>
+        </div>
       </form>
     </div>
     </div>
