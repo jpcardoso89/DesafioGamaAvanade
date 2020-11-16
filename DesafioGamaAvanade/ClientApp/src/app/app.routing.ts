@@ -5,6 +5,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SearchProdutorComponent } from './SearchProdutor/SearchProdutor.component';
 import { AuthGuard } from './helpers/auth.guard';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'fetch-data', canActivate: [AuthGuard], data: { expectedRole: 'ARTISTA' }, component: FetchDataComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'produtor/search', component: SearchProdutorComponent }
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes);

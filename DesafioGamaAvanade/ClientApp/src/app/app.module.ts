@@ -12,6 +12,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { SearchProdutorComponent } from './SearchProdutor/SearchProdutor.component';
 import { JwtInterceptor } from './helpers/jwt.inter';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 
@@ -23,7 +24,8 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     CounterComponent,
     FetchDataComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchProdutorComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

@@ -1,0 +1,61 @@
+<app-nav-menu></app-nav-menu>
+<div class="container">
+  <div class="row">
+     <div class="d-flex flex-column col-12 py-3">
+       <h1 class="mb-2">Informe seus dados de busca</h1>
+       <form #searchForm="ngForm" (submit)="onSubmit()">
+         <div class="row">
+           <div class="col-3">
+             <div class="form-group">
+               <label for="exampleInputEmail1">Numero de profissionais desejado</label>
+               <input type="number" class="form-control" id="numeroProfissionais" min="1" aria-describedby="emailHelp">
+             </div>
+           </div>
+           <div class="col-3">
+             <div class="form-group">
+               <label for="exampleInputEmail1">Genero da obra</label>
+               <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+             </div>
+           </div>
+           <div class="col-3">
+             <div class="form-group">
+               <label for="exampleInputEmail1">Data de inicio</label>
+               <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+             </div>
+           </div>
+           <div class="col-3">
+             <div class="form-group">
+               <label for="exampleInputEmail1">Orçamento Maximo</label>
+               <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+             </div>
+           </div>
+           <div class="col-12 d-flex justify-content-end">
+              <button *ngIf="!resultado" type="submit" class="btn btn-primary">Buscar</button>
+           </div>
+         </div>
+       </form>
+     </div>
+  </div>
+  <div class="row" *ngIf="resultado">
+    <div class="col-12">
+      <table class='table table-striped' aria-labelledby="tableLabel">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Temp. (C)</th>
+            <th>Temp. (F)</th>
+            <th>Summary</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>a</td>
+            <td>b</td>
+            <td>c</td>
+            <td>d</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
